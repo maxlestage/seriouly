@@ -1,0 +1,74 @@
+/* ===== 3D Interactive Glass Card ===== */
+
+.glass-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease;
+
+  /* 3D Glass — multi-layer */
+  background:
+    linear-gradient(165deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 40%,
+      transparent 60%),
+    rgba(255, 255, 255, 0.03);
+
+  backdrop-filter: blur(20px) saturate(1.4) brightness(1.03);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4) brightness(1.03);
+
+  /* 3D borders — light top-left, dark bottom-right */
+  border: 1px solid transparent;
+  border-top-color: rgba(255, 255, 255, 0.12);
+  border-left-color: rgba(255, 255, 255, 0.08);
+  border-right-color: rgba(255, 255, 255, 0.03);
+  border-bottom-color: rgba(255, 255, 255, 0.01);
+
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Specular shine layer — positioned by JS */
+.glass-card__shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  transition: background 0.15s ease;
+}
+
+/* Bottom edge caustic */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(200, 80, 192, 0.15),
+    transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.glass-card__content {
+  position: relative;
+  z-index: 3;
+}
+
+/* Hover lift */
+.glass-card:hover {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(200, 80, 192, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+}
