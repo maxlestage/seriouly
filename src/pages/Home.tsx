@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import GlassCard from '../components/GlassCard';
 import './Home.css';
 
+const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
+
 const Home = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
@@ -30,7 +32,7 @@ const Home = () => {
         <div className="hero__content">
           <div className="hero__logo-wrapper" ref={logoRef}>
             <img
-              src="/logo-seriously.png"
+              src={logoUrl}
               alt="Seriously"
               className="hero__logo"
             />

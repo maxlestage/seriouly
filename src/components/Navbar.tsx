@@ -1,13 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
+const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
+
 const Navbar = () => {
   const location = useLocation();
 
   return (
     <nav className="navbar">
       <Link to="/" className="navbar__logo">
-        <img src="/logo-seriously.png" alt="Seriously" className="navbar__logo-img" />
+        <img src={logoUrl} alt="Seriously" className="navbar__logo-img" />
         <span className="navbar__logo-text">Seriously</span>
       </Link>
 
