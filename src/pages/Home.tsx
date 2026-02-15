@@ -142,10 +142,10 @@ const Home = () => {
             </GlassCard>
 
             <GlassCard className="feature-card">
-              <div className="feature-card__icon">📸</div>
-              <h3 className="feature-card__title">Photo vérifiée</h3>
+              <div className="feature-card__icon">⚡</div>
+              <h3 className="feature-card__title">Notifications temps réel</h3>
               <p className="feature-card__desc">
-                Selfie de vérification obligatoire. Chaque profil est authentique, chaque photo est réelle.
+                Soyez alerté instantanément d'un like, d'un match ou d'un message. Ne ratez aucune opportunité.
               </p>
             </GlassCard>
 
