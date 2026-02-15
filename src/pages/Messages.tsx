@@ -71,7 +71,7 @@ const Messages = () => {
       <aside className="msg-sidebar">
         <div className="msg-sidebar__header">
           <h2 className="msg-sidebar__title">Messages</h2>
-          <span className="msg-sidebar__badge">2026 · v1.0.0</span>
+          <span className="msg-sidebar__badge">{new Date().getFullYear()} · v1.0.0</span>
         </div>
 
         <div className="msg-sidebar__search">

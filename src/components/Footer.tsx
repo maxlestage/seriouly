@@ -5,8 +5,8 @@ import './Footer.css';
 const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
 
 const BUILD_VERSION = '1.0.0';
-const BUILD_YEAR = '2026';
-const BUILD_NUMBER = '20260214';
+const CURRENT_YEAR = new Date().getFullYear();
+const BUILD_DATE = new Date().toISOString().slice(0, 10).replace(/-/g, '');
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -26,11 +26,11 @@ const Footer = () => {
         </div>
 
         <div className="footer__meta">
-          <span className="footer__year">&copy; {BUILD_YEAR} Seriously</span>
+          <span className="footer__year">&copy; {CURRENT_YEAR} Seriously</span>
           <span className="footer__separator">·</span>
           <span className="footer__build">v{BUILD_VERSION}</span>
           <span className="footer__separator">·</span>
-          <span className="footer__build">Build #{BUILD_NUMBER}</span>
+          <span className="footer__build">Build #{BUILD_DATE}</span>
         </div>
 
         <div className="footer__links">

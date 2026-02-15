@@ -1,5 +1,8 @@
 import './About.css';
 
+const CURRENT_YEAR = new Date().getFullYear();
+const BUILD_DATE = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+
 const About = () => {
   return (
     <div className="about">
@@ -54,12 +57,12 @@ const About = () => {
 
       <section className="about__footer-info">
         <div className="about__version-block">
-          <span className="about__version-year">2026</span>
+          <span className="about__version-year">{CURRENT_YEAR}</span>
           <span className="about__version-sep">·</span>
-          <span className="about__version-num">Version 1.0.0 — Build #20260214</span>
+          <span className="about__version-num">Version 1.0.0 — Build #{BUILD_DATE}</span>
         </div>
         <p className="about__legal">
-          &copy; 2026 Seriously — Lestage Maxime Nathan
+          &copy; {CURRENT_YEAR} Seriously — Lestage Maxime Nathan
         </p>
       </section>
     </div>

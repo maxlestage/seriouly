@@ -1,4 +1,5 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
+import AnimatedBackground from './components/AnimatedBackground';
 import GlassCursor from './components/GlassCursor';
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
@@ -11,6 +12,7 @@ import './App.css';
 function App() {
   return (
     <HashRouter>
+      <AnimatedBackground />
       <div className="app">
         <ScrollToTop />
         <GlassCursor />

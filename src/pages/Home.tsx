@@ -3,6 +3,8 @@ import GlassCard from '../components/GlassCard';
 import './Home.css';
 
 const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
+const CURRENT_YEAR = new Date().getFullYear();
+const BUILD_DATE = new Date().toISOString().slice(0, 10).replace(/-/g, '');
 
 const Home = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -63,9 +65,9 @@ const Home = () => {
           </div>
 
           <div className="hero__badge">
-            <span className="hero__badge-year">2026</span>
+            <span className="hero__badge-year">{CURRENT_YEAR}</span>
             <span className="hero__badge-dot" />
-            <span className="hero__badge-build">Build #20260214 · v1.0.0</span>
+            <span className="hero__badge-build">Build #{BUILD_DATE} · v1.0.0</span>
           </div>
         </div>
 
@@ -133,7 +135,7 @@ const Home = () => {
             Licence <span className="text-gradient">propriétaire</span>
           </h2>
           <p className="licences__subtitle">
-            Copyright &copy; 2024-2026 Lestage Maxime Nathan — Tous droits réservés.
+            Copyright &copy; 2024-{CURRENT_YEAR} Lestage Maxime Nathan — Tous droits réservés.
           </p>
 
           <div className="licences__grid">
