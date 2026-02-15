@@ -167,7 +167,7 @@ const Home = () => {
             Licence <span className="text-gradient">propriétaire</span>
           </h2>
           <p className="licences__subtitle">
-            Copyright &copy; 2024-{CURRENT_YEAR} Lestage Maxime Nathan — Tous droits réservés.
+            Copyright &copy; {CURRENT_YEAR} Lestage Maxime Nathan — Tous droits réservés.
           </p>
 
           <div className="licences__grid">
