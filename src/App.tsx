@@ -1,5 +1,6 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import GlassCursor from './components/GlassCursor';
+import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -11,6 +12,7 @@ function App() {
   return (
     <HashRouter>
       <div className="app">
+        <ScrollToTop />
         <GlassCursor />
         <Navbar />
         <Routes>
