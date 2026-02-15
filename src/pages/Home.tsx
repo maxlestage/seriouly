@@ -124,6 +124,38 @@ const Home = () => {
                 Un algorithme qui apprend de vos préférences pour vous proposer des profils vraiment compatibles.
               </p>
             </GlassCard>
+
+            <GlassCard className="feature-card">
+              <div className="feature-card__icon">📍</div>
+              <h3 className="feature-card__title">Géolocalisation smart</h3>
+              <p className="feature-card__desc">
+                Rencontrez des personnes autour de vous. Définissez votre rayon et découvrez qui est proche.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="feature-card">
+              <div className="feature-card__icon">🎭</div>
+              <h3 className="feature-card__title">Icebreakers</h3>
+              <p className="feature-card__desc">
+                Des questions fun et originales pour briser la glace. Fini les « Salut, ça va ? » ennuyeux.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="feature-card">
+              <div className="feature-card__icon">📸</div>
+              <h3 className="feature-card__title">Photo vérifiée</h3>
+              <p className="feature-card__desc">
+                Selfie de vérification obligatoire. Chaque profil est authentique, chaque photo est réelle.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="feature-card">
+              <div className="feature-card__icon">🌙</div>
+              <h3 className="feature-card__title">Mode incognito</h3>
+              <p className="feature-card__desc">
+                Naviguez en toute discrétion. Choisissez qui peut voir votre profil et contrôlez votre visibilité.
+              </p>
+            </GlassCard>
           </div>
         </div>
       </section>
