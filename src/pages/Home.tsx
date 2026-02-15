@@ -114,6 +114,57 @@ const Home = () => {
                 Vérification de photos, modération IA, et respect absolu de vos données.
               </p>
             </GlassCard>
+
+            <GlassCard className="feature-card">
+              <div className="feature-card__icon">🎯</div>
+              <h3 className="feature-card__title">Matching intelligent</h3>
+              <p className="feature-card__desc">
+                Un algorithme qui apprend de vos préférences pour vous proposer des profils vraiment compatibles.
+              </p>
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== LICENCES ===== */}
+      <section className="licences" id="licences">
+        <div className="licences__inner">
+          <h2 className="licences__title">
+            Mentions <span className="text-gradient">légales</span>
+          </h2>
+
+          <div className="licences__grid">
+            <div className="licences__card">
+              <h3 className="licences__card-title">Éditeur</h3>
+              <p className="licences__card-text">
+                Seriously SAS — Application de rencontres<br />
+                Siège social : Paris, France<br />
+                Contact : contact@seriously.app
+              </p>
+            </div>
+
+            <div className="licences__card">
+              <h3 className="licences__card-title">Hébergement</h3>
+              <p className="licences__card-text">
+                Site hébergé par GitHub Pages<br />
+                API hébergée sur infrastructure cloud sécurisée<br />
+                Données chiffrées en transit et au repos
+              </p>
+            </div>
+
+            <div className="licences__card">
+              <h3 className="licences__card-title">Données personnelles</h3>
+              <p className="licences__card-text">
+                Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Contactez-nous à privacy@seriously.app.
+              </p>
+            </div>
+
+            <div className="licences__card">
+              <h3 className="licences__card-title">Propriété intellectuelle</h3>
+              <p className="licences__card-text">
+                L'ensemble du contenu (textes, images, logo) est protégé par le droit d'auteur. Toute reproduction est interdite sans autorisation préalable.
+              </p>
+            </div>
           </div>
         </div>
       </section>

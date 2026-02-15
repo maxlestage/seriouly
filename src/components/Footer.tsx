@@ -26,6 +26,7 @@ const Footer = () => {
         <div className="footer__links">
           <a href="/about" className="footer__link">À propos</a>
           <a href="/messages" className="footer__link">Messages</a>
+          <a href="#licences" className="footer__link">Licences</a>
         </div>
       </div>
     </footer>
