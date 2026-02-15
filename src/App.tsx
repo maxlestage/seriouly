@@ -14,10 +14,11 @@ function App() {
         <GlassCursor />
         <Navbar />
         <Routes>
-          <Route path="/" element={<><Home /><Footer /></>} />
+          <Route path="/" element={<Home />} />
           <Route path="/messages" element={<Messages />} />
-          <Route path="/about" element={<><About /><Footer /></>} />
+          <Route path="/about" element={<About />} />
         </Routes>
+        <Footer />
       </div>
     </HashRouter>
   );
