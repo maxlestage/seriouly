@@ -1,10 +1,17 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { scrollToSection } from '../utils/scrollToSection';
 import './Navbar.css';
 
 const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const location = useLocation();
+
+  const handleAnchorClick = (sectionId: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    scrollToSection(sectionId, location.pathname, navigate);
+  };
 
   return (
     <nav className="navbar">
@@ -20,6 +27,13 @@ const Navbar = () => {
         >
           Accueil
         </Link>
+        <a
+          href="#features"
+          className="navbar__link"
+          onClick={handleAnchorClick('features')}
+        >
+          Fonctionnalités
+        </a>
         <Link
           to="/messages"
           className={`navbar__link ${location.pathname === '/messages' ? 'navbar__link--active' : ''}`}
@@ -35,7 +49,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar__cta">
-        <a href="#download" className="navbar__btn interactive">
+        <a href="#download" className="navbar__btn interactive" onClick={handleAnchorClick('download')}>
           Télécharger
         </a>
       </div>

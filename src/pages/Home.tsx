@@ -53,11 +53,11 @@ const Home = () => {
           </p>
 
           <div className="hero__cta-group">
-            <a href="#features" className="hero__cta interactive">
+            <a href="#features" className="hero__cta interactive" onClick={(e) => { e.preventDefault(); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); }}>
               Découvrir
               <span className="hero__cta-arrow">→</span>
             </a>
-            <a href="#download" className="hero__cta hero__cta--outline interactive">
+            <a href="#download" className="hero__cta hero__cta--outline interactive" onClick={(e) => { e.preventDefault(); document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' }); }}>
               Télécharger l'app
             </a>
           </div>

@@ -1,4 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { scrollToSection } from '../utils/scrollToSection';
 import './Footer.css';
 
 const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
@@ -11,16 +12,9 @@ const Footer = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleLicencesClick = (e: React.MouseEvent) => {
+  const handleAnchorClick = (sectionId: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    if (location.pathname === '/') {
-      document.getElementById('licences')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/');
-      setTimeout(() => {
-        document.getElementById('licences')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }
+    scrollToSection(sectionId, location.pathname, navigate);
   };
 
   return (
@@ -40,9 +34,11 @@ const Footer = () => {
         </div>
 
         <div className="footer__links">
-          <Link to="/about" className="footer__link">À propos</Link>
+          <a href="#features" className="footer__link" onClick={handleAnchorClick('features')}>Fonctionnalités</a>
+          <a href="#download" className="footer__link" onClick={handleAnchorClick('download')}>Télécharger</a>
+          <a href="#licences" className="footer__link" onClick={handleAnchorClick('licences')}>Licences</a>
           <Link to="/messages" className="footer__link">Messages</Link>
-          <a href="#licences" className="footer__link" onClick={handleLicencesClick}>Licences</a>
+          <Link to="/about" className="footer__link">À propos</Link>
         </div>
       </div>
     </footer>
