@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
@@ -24,9 +25,9 @@ const Footer = () => {
         </div>
 
         <div className="footer__links">
-          <a href="/about" className="footer__link">À propos</a>
-          <a href="/messages" className="footer__link">Messages</a>
-          <a href="#licences" className="footer__link">Licences</a>
+          <Link to="/about" className="footer__link">À propos</Link>
+          <Link to="/messages" className="footer__link">Messages</Link>
+          <a href="#/licences" className="footer__link" onClick={(e) => { e.preventDefault(); document.getElementById('licences')?.scrollIntoView({ behavior: 'smooth' }); }}>Licences</a>
         </div>
       </div>
     </footer>
