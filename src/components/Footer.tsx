@@ -6,7 +6,7 @@ const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
 
 const BUILD_VERSION = '1.0.0';
 const CURRENT_YEAR = new Date().getFullYear();
-const BUILD_DATE = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+const BUILD_DATE = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Footer = () => {
           <span className="footer__separator">·</span>
           <span className="footer__build">v{BUILD_VERSION}</span>
           <span className="footer__separator">·</span>
-          <span className="footer__build">Build #{BUILD_DATE}</span>
+          <span className="footer__build">{BUILD_DATE}</span>
         </div>
 
         <div className="footer__links">

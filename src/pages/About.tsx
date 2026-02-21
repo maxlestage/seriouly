@@ -1,7 +1,7 @@
 import './About.css';
 
 const CURRENT_YEAR = new Date().getFullYear();
-const BUILD_DATE = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+const BUILD_DATE = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
 const About = () => {
   return (
@@ -59,7 +59,7 @@ const About = () => {
         <div className="about__version-block">
           <span className="about__version-year">{CURRENT_YEAR}</span>
           <span className="about__version-sep">·</span>
-          <span className="about__version-num">Version 1.0.0 — Build #{BUILD_DATE}</span>
+          <span className="about__version-num">Version 1.0.0 — {BUILD_DATE}</span>
         </div>
         <p className="about__legal">
           &copy; {CURRENT_YEAR} Seriously — Lestage Maxime Nathan

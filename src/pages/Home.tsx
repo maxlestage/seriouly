@@ -4,7 +4,7 @@ import './Home.css';
 
 const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
 const CURRENT_YEAR = new Date().getFullYear();
-const BUILD_DATE = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+const BUILD_DATE = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
 const Home = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -67,7 +67,7 @@ const Home = () => {
           <div className="hero__badge">
             <span className="hero__badge-year">{CURRENT_YEAR}</span>
             <span className="hero__badge-dot" />
-            <span className="hero__badge-build">Build #{BUILD_DATE} · v1.0.0</span>
+            <span className="hero__badge-build">{BUILD_DATE} · v1.0.0</span>
           </div>
         </div>
 
