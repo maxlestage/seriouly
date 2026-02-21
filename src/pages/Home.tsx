@@ -67,7 +67,7 @@ const Home = () => {
           <div className="hero__badge">
             <span className="hero__badge-year">{CURRENT_YEAR}</span>
             <span className="hero__badge-dot" />
-            <span className="hero__badge-build">{BUILD_DATE} · v1.0.0</span>
+            <span className="hero__badge-build">Date {BUILD_DATE} · v1.0.0</span>
           </div>
         </div>
 

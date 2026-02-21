@@ -30,7 +30,7 @@ const Footer = () => {
           <span className="footer__separator">·</span>
           <span className="footer__build">v{BUILD_VERSION}</span>
           <span className="footer__separator">·</span>
-          <span className="footer__build">{BUILD_DATE}</span>
+          <span className="footer__build">Date {BUILD_DATE}</span>
         </div>
 
         <div className="footer__links">
