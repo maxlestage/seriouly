@@ -85,9 +85,24 @@ a, button, input, textarea, select, [role="button"] {
   cursor: none;
 }
 
+/* Touch devices: restore native cursor + safe-area padding */
+@media (hover: none) and (pointer: coarse) {
+  body, a, button, input, textarea, select, [role="button"] {
+    cursor: auto;
+  }
+}
+
 ::selection {
   background: rgba(200, 80, 192, 0.3);
   color: #fff;
+}
+
+/* Safe area for iPhone notch / Dynamic Island */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
 }
 
 /* Scrollbar */

@@ -441,24 +441,64 @@
   pointer-events: none;
 }
 
+/* Back button — hidden on desktop */
+.msg-chat__back {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 768px) {
-  .msg-sidebar {
-    width: 80px;
-    min-width: 80px;
+  /* Dynamic viewport height handles keyboard correctly on mobile */
+  .messages-page {
+    height: 100dvh;
   }
 
-  .msg-sidebar__header,
-  .msg-sidebar__search,
-  .msg-convo__info,
-  .msg-convo__unread {
+  /* Sidebar fills full width, chat is hidden */
+  .msg-sidebar {
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .msg-chat {
     display: none;
   }
 
+  /* When a conversation is selected, show chat and hide sidebar */
+  .messages-page--chat .msg-sidebar {
+    display: none;
+  }
+
+  .messages-page--chat .msg-chat {
+    display: flex;
+    width: 100%;
+  }
+
+  /* Back button visible on mobile */
+  .msg-chat__back {
+    display: flex;
+  }
+
+  .msg-sidebar__search-input {
+    min-height: 44px;
+    font-size: 1rem;
+  }
+
   .msg-convo {
-    justify-content: center;
-    padding: 12px;
+    padding: 14px 20px;
+    min-height: 64px;
   }
 
   .msg-chat__messages {
@@ -467,5 +507,31 @@
 
   .msg-bubble {
     max-width: 85%;
+  }
+
+  /* Input area: account for iOS/Android home bar */
+  .msg-chat__input-area {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
+  }
+
+  /* Send button min touch target */
+  .msg-chat__send {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Disable hover effects on touch devices */
+@media (hover: none) {
+  .msg-convo:hover {
+    background: transparent;
+  }
+
+  .msg-convo--active:hover {
+    background: rgba(200, 80, 192, 0.08);
+  }
+
+  .msg-chat__send:hover {
+    transform: none;
   }
 }
