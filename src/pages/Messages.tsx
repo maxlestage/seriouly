@@ -32,6 +32,12 @@ const Messages = () => {
   const [messages, setMessages] = useState<ChatMessage[]>(DEMO_MESSAGES);
   const [input, setInput] = useState('');
   const [lastTap, setLastTap] = useState<{ id: number; time: number } | null>(null);
+  const [showChat, setShowChat] = useState(false);
+
+  const handleSelectConvo = (conv: typeof DEMO_CONVERSATIONS[0]) => {
+    setActiveConvo(conv);
+    setShowChat(true);
+  };
 
   const handleDoubleTap = (msgId: number) => {
     const now = Date.now();
@@ -66,7 +72,7 @@ const Messages = () => {
   };
 
   return (
-    <div className="messages-page">
+    <div className={`messages-page ${showChat ? 'messages-page--chat' : ''}`}>
       {/* Sidebar */}
       <aside className="msg-sidebar">
         <div className="msg-sidebar__header">
@@ -87,7 +93,7 @@ const Messages = () => {
             <div
               key={conv.id}
               className={`msg-convo ${activeConvo.id === conv.id ? 'msg-convo--active' : ''} interactive`}
-              onClick={() => setActiveConvo(conv)}
+              onClick={() => handleSelectConvo(conv)}
             >
               <div className="msg-convo__avatar">
                 <span>{conv.initial}</span>
@@ -111,6 +117,9 @@ const Messages = () => {
       <main className="msg-chat">
         {/* Chat header */}
         <div className="msg-chat__header">
+          <button className="msg-chat__back" onClick={() => setShowChat(false)} aria-label="Retour">
+            ←
+          </button>
           <div className="msg-chat__header-avatar">
             <span>{activeConvo.initial}</span>
           </div>
@@ -122,7 +131,7 @@ const Messages = () => {
 
         {/* Hint */}
         <div className="msg-chat__hint">
-          Double-cliquez sur un message pour l'aimer ♥
+          Appuyez deux fois sur un message pour l'aimer ♥
         </div>
 
         {/* Messages */}

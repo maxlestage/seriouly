@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import './GlassCursor.css';
 
+const isTouchDevice = () =>
+  window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
 const GlassCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -10,6 +13,8 @@ const GlassCursor = () => {
   const trailPos = useRef({ x: -100, y: -100 });
   const raf = useRef<number>(0);
   const [visible, setVisible] = useState(false);
+
+  if (isTouchDevice()) return null;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
