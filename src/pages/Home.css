@@ -530,11 +530,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   padding: 12px 16px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.04);
   transition: border-color 0.3s ease;
+}
+
+@media (max-width: 540px) {
+  .licences__tech {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px 12px;
+  }
 }
 
 .licences__tech:hover {
