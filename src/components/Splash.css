@@ -1,0 +1,52 @@
+/* ===== Splash Screen — mobile launch screen ===== */
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Fade out triggered by .splash--fading */
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.splash--fading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.splash__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.splash__logo {
+  width: 200px;
+  height: 200px;
+  /* Remove the dark mix-blend-mode used on the dark site */
+  mix-blend-mode: normal;
+  animation: splashLogoIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.splash__name {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #c8c8c8;
+  letter-spacing: 0.06em;
+  animation: splashTextIn 0.5s 0.25s ease both;
+}
+
+@keyframes splashLogoIn {
+  0%   { opacity: 0; transform: scale(0.82) translateY(24px); }
+  100% { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+@keyframes splashTextIn {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
