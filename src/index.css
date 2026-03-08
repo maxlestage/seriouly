@@ -90,6 +90,18 @@ a, button, input, textarea, select, [role="button"] {
   body, a, button, input, textarea, select, [role="button"] {
     cursor: auto;
   }
+
+  /* Momentum scrolling + prevent pull-to-refresh bounce */
+  html {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
+
+  /* Prevent text size adjustment when rotating */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
 }
 
 ::selection {
