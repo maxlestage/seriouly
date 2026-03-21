@@ -29,9 +29,7 @@ html {
   scroll-behavior: smooth;
   width: 100%;
   height: 100%;
-  /* Prevent layout shift when scrollbar appears/disappears */
-  scrollbar-gutter: stable;
-  /* Offset scroll targets below the fixed navbar (≈ 65px) */
+  overflow-x: hidden;
   scroll-padding-top: 72px;
 }
 
