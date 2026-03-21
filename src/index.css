@@ -29,6 +29,10 @@ html {
   scroll-behavior: smooth;
   width: 100%;
   height: 100%;
+  /* Prevent layout shift when scrollbar appears/disappears */
+  scrollbar-gutter: stable;
+  /* Offset scroll targets below the fixed navbar (≈ 65px) */
+  scroll-padding-top: 72px;
 }
 
 body {
@@ -45,17 +49,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Dark purple gradient background — matches the provided image */
+/* Dark purple gradient background — matching the app launch screen */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(ellipse 60% 50% at 15% 5%, rgba(139, 69, 160, 0.25) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 85% 90%, rgba(88, 28, 135, 0.2) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(26, 10, 46, 0.8) 0%, transparent 100%),
-    linear-gradient(160deg, #1a0a2e 0%, #0d0515 40%, #110820 70%, #1a0a2e 100%);
+    radial-gradient(ellipse 90% 55% at 25% 0%,   rgba(160, 50, 200, 0.45) 0%, transparent 60%),
+    radial-gradient(ellipse 65% 50% at 8%  100%,  rgba(120, 30, 170, 0.4)  0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 92% 95%,   rgba(100, 20, 160, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 50% 50%,   rgba(26, 10, 46, 0.7)   0%, transparent 100%),
+    linear-gradient(170deg, #1e1035 0%, #0f0820 45%, #15082a 75%, #1a0f35 100%);
 }
 
 /* Subtle noise texture */
@@ -109,9 +114,9 @@ a, button, input, textarea, select, [role="button"] {
   color: #fff;
 }
 
-/* Safe area for iPhone notch / Dynamic Island */
+/* Safe area for iPhone notch / Dynamic Island — on #root to avoid body scroll shift */
 @supports (padding: env(safe-area-inset-bottom)) {
-  body {
+  #root {
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
@@ -136,4 +141,6 @@ a, button, input, textarea, select, [role="button"] {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
+  /* Centre le contenu même avec les safe-area paddings */
+  box-sizing: border-box;
 }
