@@ -46,7 +46,7 @@
     background 0.3s ease;
 }
 
-/* --- Large trail: loupe cristal --- */
+/* --- Large trail: loupe réaliste --- */
 .glass-trail {
   width: 140px;
   height: 140px;
@@ -56,76 +56,76 @@
   pointer-events: none;
   position: relative;
 
-  /* Centre transparent — on voit à travers comme une vraie loupe */
-  background: transparent;
+  /*
+   * Effet zoom réel :
+   * brightness + contrast + saturate amplifient ce qui est sous la loupe.
+   * Pas de blur pour garder le contenu net comme une vraie loupe.
+   */
+  background:
+    /* Vignette convexe — bords légèrement assombris comme une lentille */
+    radial-gradient(circle,
+      transparent 55%,
+      rgba(0, 0, 0, 0.08) 80%,
+      rgba(0, 0, 0, 0.18) 100%
+    );
 
-  /* Zoom loupe : amplifie légèrement la luminosité + contraste sans flouter */
-  backdrop-filter: brightness(1.18) contrast(1.08) saturate(1.35);
-  -webkit-backdrop-filter: brightness(1.18) contrast(1.08) saturate(1.35);
+  backdrop-filter: brightness(1.35) contrast(1.2) saturate(1.5);
+  -webkit-backdrop-filter: brightness(1.35) contrast(1.2) saturate(1.5);
 
-  /* Monture en verre cristal : épaisse, reflets 3D */
-  border: 6px solid transparent;
-  border-top-color:    rgba(255, 255, 255, 0.55);
-  border-left-color:   rgba(255, 255, 255, 0.38);
-  border-right-color:  rgba(255, 255, 255, 0.15);
-  border-bottom-color: rgba(255, 255, 255, 0.08);
+  /* Monture épaisse avec reflets naturels — lumière vient du haut-gauche */
+  border: 7px solid transparent;
+  border-top-color:    rgba(255, 255, 255, 0.70);
+  border-left-color:   rgba(255, 255, 255, 0.50);
+  border-right-color:  rgba(255, 255, 255, 0.18);
+  border-bottom-color: rgba(255, 255, 255, 0.10);
 
   box-shadow:
-    /* Ombre externe — la loupe flotte */
-    0 12px 40px rgba(0, 0, 0, 0.35),
-    0 4px 12px rgba(0, 0, 0, 0.2),
-    /* Halo violet subtil */
-    0 0 50px rgba(200, 80, 192, 0.10),
-    /* Reflet interne haut */
-    inset 0 3px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+    0 16px 48px rgba(0, 0, 0, 0.45),
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(0, 0, 0, 0.15),
+    inset 0 4px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.2),
+    inset 4px 0 0 rgba(255, 255, 255, 0.12),
+    inset -4px 0 0 rgba(0, 0, 0, 0.08);
 
+  /* Pas de rotation — juste légère respiration de taille */
   animation: trailZoom 4s ease-in-out infinite;
 
   transition:
     width 0.4s ease,
     height 0.4s ease,
     margin 0.4s ease,
-    border-color 0.4s ease,
     box-shadow 0.4s ease;
 }
 
-/* Arc de lumière qui glisse sur la monture */
+/* Reflet fixe haut-gauche — comme sur une vraie lentille */
 .glass-trail::before {
   content: '';
   position: absolute;
-  inset: -6px;
+  top: 8px;
+  left: 14px;
+  width: 36px;
+  height: 10px;
   border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    rgba(255, 255, 255, 0.55) 0deg,
-    transparent 40deg,
-    transparent 160deg,
-    rgba(255, 255, 255, 0.12) 200deg,
-    transparent 240deg,
-    transparent 360deg
-  );
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(3px);
   pointer-events: none;
-  animation: loupeSweep 4s linear infinite;
+  transform: rotate(-35deg);
 }
 
-/* Petit éclat de reflet fixe en haut-gauche de la monture */
+/* Second petit reflet */
 .glass-trail::after {
   content: '';
   position: absolute;
-  top: 4px;
-  left: 18px;
-  width: 28px;
-  height: 6px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.5);
+  top: 16px;
+  left: 30px;
+  width: 14px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.30);
   filter: blur(2px);
   pointer-events: none;
-}
-
-@keyframes loupeSweep {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  transform: rotate(-35deg);
 }
 
 /* ===== Zoom animations ===== */
