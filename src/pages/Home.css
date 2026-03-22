@@ -69,78 +69,28 @@
   max-width: 800px;
 }
 
-/* Logo — disque de verre 3D */
+/* Logo */
 .hero__logo-wrapper {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   margin-bottom: 48px;
   will-change: transform, opacity;
-
-  /* Disque verre */
-  padding: 40px;
-  border-radius: 50%;
-
-  background:
-    radial-gradient(circle at 28% 22%,
-      rgba(255, 255, 255, 0.14) 0%,
-      rgba(255, 255, 255, 0.04) 45%,
-      transparent 70%),
-    rgba(255, 255, 255, 0.05);
-
-  backdrop-filter: blur(28px) saturate(1.6) brightness(1.05);
-  -webkit-backdrop-filter: blur(28px) saturate(1.6) brightness(1.05);
-
-  border: 1px solid transparent;
-  border-top-color:    rgba(255, 255, 255, 0.22);
-  border-left-color:   rgba(255, 255, 255, 0.14);
-  border-right-color:  rgba(255, 255, 255, 0.04);
-  border-bottom-color: rgba(255, 255, 255, 0.01);
-
-  box-shadow:
-    0 12px 60px rgba(0, 0, 0, 0.4),
-    0 0 100px rgba(190, 50, 240, 0.22),
-    inset 0 2px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.14);
-
-  animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Refraction arc — lumière qui passe à travers le verre */
-.hero__logo-wrapper::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 130deg,
-    rgba(255, 255, 255, 0.12) 0deg,
-    transparent 60deg,
-    rgba(200, 80, 192, 0.07) 180deg,
-    transparent 240deg,
-    rgba(255, 255, 255, 0.06) 300deg,
-    transparent 360deg
-  );
-  pointer-events: none;
 }
 
 .hero__logo {
   width: 160px;
   height: 160px;
-  filter: drop-shadow(0 0 40px rgba(200, 80, 192, 0.4));
+  filter: drop-shadow(0 0 40px rgba(200, 80, 192, 0.3));
   mix-blend-mode: lighten;
-  position: relative;
-  z-index: 1;
+  animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hero__logo-glow {
   position: absolute;
-  inset: -50px;
+  inset: -40px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(200, 80, 192, 0.18) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(200, 80, 192, 0.12) 0%, transparent 70%);
   animation: glowPulse 4s ease-in-out infinite;
-  pointer-events: none;
 }
 
 @keyframes logoReveal {
@@ -306,6 +256,26 @@
   100% { opacity: 1; transform: translateY(0); }
 }
 
+/* Pulsation des arêtes des cartes */
+@keyframes cardEdgePulse {
+  0%, 100% {
+    border-top-color: rgba(255, 255, 255, 0.16);
+    box-shadow:
+      0 6px 24px rgba(0, 0, 0, 0.28),
+      0 1px 0 rgba(255, 255, 255, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  }
+  50% {
+    border-top-color: rgba(200, 80, 192, 0.30);
+    box-shadow:
+      0 6px 24px rgba(0, 0, 0, 0.28),
+      0 0 28px rgba(200, 80, 192, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  }
+}
+
 /* ===== FEATURES ===== */
 
 .features {
@@ -362,6 +332,7 @@
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.45s ease,
     border-color 0.45s ease;
+  animation: cardEdgePulse 5s ease-in-out infinite;
 
   background:
     linear-gradient(165deg,
@@ -404,21 +375,29 @@
   opacity: 0.6;
 }
 
-/* Arête lumineuse bas */
+/* Arête lumineuse bas — animée */
 .feature-card::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 8%;
-  width: 84%;
+  left: 0;
+  width: 100%;
   height: 1px;
   background: linear-gradient(90deg,
-    transparent,
-    rgba(200, 80, 192, 0.25),
-    transparent);
+    transparent 0%,
+    rgba(200, 80, 192, 0.15) 30%,
+    rgba(231, 127, 191, 0.45) 50%,
+    rgba(200, 80, 192, 0.15) 70%,
+    transparent 100%);
+  background-size: 200% 100%;
   pointer-events: none;
-  transition: opacity 0.4s ease;
-  opacity: 0.6;
+  animation: edgeSweep 4s ease-in-out infinite;
+}
+
+@keyframes edgeSweep {
+  0%   { background-position: -100% 0; opacity: 0.5; }
+  50%  { background-position:  100% 0; opacity: 1; }
+  100% { background-position:  300% 0; opacity: 0.5; }
 }
 
 .feature-card:hover {
@@ -441,6 +420,16 @@
 .feature-card:hover::after {
   opacity: 1;
 }
+
+/* Décalage de phase par position — évite que toutes les cartes pulsent ensemble */
+.feature-card:nth-child(2)  { animation-delay: -1.6s; }
+.feature-card:nth-child(3)  { animation-delay: -3.2s; }
+.feature-card:nth-child(4)  { animation-delay: -0.8s; }
+.feature-card:nth-child(5)  { animation-delay: -2.4s; }
+.feature-card:nth-child(6)  { animation-delay: -4.0s; }
+.feature-card:nth-child(7)  { animation-delay: -1.2s; }
+.feature-card:nth-child(8)  { animation-delay: -2.8s; }
+.feature-card:nth-child(9)  { animation-delay: -4.4s; }
 
 .feature-card__icon {
   font-size: 2rem;
@@ -755,13 +744,12 @@
   }
 
   .hero__logo {
-    width: 110px;
-    height: 110px;
+    width: 120px;
+    height: 120px;
   }
 
   .hero__logo-wrapper {
     margin-bottom: 32px;
-    padding: 28px;
   }
 
   /* Touch target minimum 44px */
