@@ -47,18 +47,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Dark purple gradient background — matching the app launch screen */
+/* Dark purple gradient background — fidèle à l'image de l'app */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(ellipse 90% 55% at 25% 0%,   rgba(160, 50, 200, 0.45) 0%, transparent 60%),
-    radial-gradient(ellipse 65% 50% at 8%  100%,  rgba(120, 30, 170, 0.4)  0%, transparent 55%),
-    radial-gradient(ellipse 55% 45% at 92% 95%,   rgba(100, 20, 160, 0.35) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 60% at 50% 50%,   rgba(26, 10, 46, 0.7)   0%, transparent 100%),
-    linear-gradient(170deg, #1e1035 0%, #0f0820 45%, #15082a 75%, #1a0f35 100%);
+    /* Orbe violet-rose fort en haut à gauche */
+    radial-gradient(ellipse 100% 70% at 5% -5%,  rgba(190, 50, 240, 0.75) 0%, transparent 65%),
+    /* Orbe violet fort en bas à droite */
+    radial-gradient(ellipse 75% 60% at 100% 105%, rgba(120, 25, 210, 0.72) 0%, transparent 60%),
+    /* Léger halo bas-gauche */
+    radial-gradient(ellipse 50% 40% at 0% 95%,   rgba(100, 15, 170, 0.35) 0%, transparent 55%),
+    /* Base sombre indigo-charbon */
+    linear-gradient(175deg, #1a1030 0%, #0c0618 45%, #110826 75%, #18102e 100%);
 }
 
 /* Subtle noise texture */
