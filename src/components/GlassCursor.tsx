@@ -89,6 +89,11 @@ const GlassCursor = () => {
 
         // Rebuild clone only when element changes
         if (target !== zoomedEl.current) {
+          // Restore mask on the PREVIOUS element before switching
+          if (zoomedEl.current) {
+            zoomedEl.current.style.maskImage = '';
+            (zoomedEl.current.style as CSSStyleDeclaration & { webkitMaskImage: string }).webkitMaskImage = '';
+          }
           const clone = target.cloneNode(true) as HTMLElement;
           // Copy styles that may come from ancestor CSS selectors
           const cs = getComputedStyle(target);
