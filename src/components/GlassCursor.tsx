@@ -61,8 +61,8 @@ const GlassCursor = () => {
           `translate(${trailPos.current.x}px, ${trailPos.current.y}px)`;
       }
 
-      // Real text magnification: scale the element under the loupe center
-      const el = document.elementFromPoint(trailPos.current.x, trailPos.current.y);
+      // Real text magnification: use actual mouse pos for accurate hit detection
+      const el = document.elementFromPoint(pos.current.x, pos.current.y);
       const target = findTextAncestor(el);
 
       if (target !== zoomedEl.current) {
@@ -70,25 +70,24 @@ const GlassCursor = () => {
         if (zoomedEl.current) {
           zoomedEl.current.style.transform = '';
           zoomedEl.current.style.transformOrigin = '';
+          zoomedEl.current.style.zIndex = '';
         }
         // Zoom new target
         if (target) {
           const rect = target.getBoundingClientRect();
-          const ox = trailPos.current.x - rect.left;
-          const oy = trailPos.current.y - rect.top;
+          const ox = pos.current.x - rect.left;
+          const oy = pos.current.y - rect.top;
           target.style.transformOrigin = `${ox}px ${oy}px`;
-          target.style.transform = 'scale(1.18)';
-          // Smooth via CSS transition already or inline
-          if (!target.style.transition.includes('transform')) {
-            target.style.transition = 'transform 0.15s ease, transform-origin 0.15s ease';
-          }
+          target.style.transform = 'scale(1.3)';
+          target.style.zIndex = '10';
+          target.style.transition = 'transform 0.12s ease';
         }
         zoomedEl.current = target;
-      } else if (target && zoomedEl.current === target) {
-        // Update transform-origin as cursor moves within the element
+      } else if (target) {
+        // Update transform-origin live as cursor moves within the element
         const rect = target.getBoundingClientRect();
-        const ox = trailPos.current.x - rect.left;
-        const oy = trailPos.current.y - rect.top;
+        const ox = pos.current.x - rect.left;
+        const oy = pos.current.y - rect.top;
         target.style.transformOrigin = `${ox}px ${oy}px`;
       }
 
