@@ -97,12 +97,10 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.12s ease;
-  /* Dark panel covers the backdrop-filter output so clone renders cleanly */
   background: transparent;
 }
 
 .glass-trail__lens.active {
-  background: rgba(8, 3, 18, 0.93);
   opacity: 1;
 }
 

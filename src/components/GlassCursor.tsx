@@ -47,6 +47,11 @@ const GlassCursor = () => {
         lensRef.current.innerHTML = '';
         lensRef.current.classList.remove('active');
       }
+      // Restore mask on original element
+      if (zoomedEl.current) {
+        zoomedEl.current.style.maskImage = '';
+        (zoomedEl.current.style as CSSStyleDeclaration & { webkitMaskImage: string }).webkitMaskImage = '';
+      }
       zoomedEl.current = null;
       lensClone.current = null;
     };
@@ -100,6 +105,14 @@ const GlassCursor = () => {
           zoomedEl.current = target;
           lens.classList.add('active');
         }
+
+        // Mask out the original element inside the loupe circle (prevents doubling).
+        // mask-image: transparent inside circle = original hidden there; black = visible.
+        const mx = tx - rect.left;
+        const my = ty - rect.top;
+        const maskVal = `radial-gradient(circle at ${mx}px ${my}px, transparent 66px, black 72px)`;
+        target.style.maskImage = maskVal;
+        (target.style as CSSStyleDeclaration & { webkitMaskImage: string }).webkitMaskImage = maskVal;
 
         // Position clone every frame so loupe-center maps to the text at cursor
         // glass-trail is 140×140 with margin -70/-70, so its local center = (70, 70)
