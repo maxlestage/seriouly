@@ -4,7 +4,10 @@ import './GlassCursor.css';
 const isTouchDevice = () =>
   window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-const TEXT_TAGS = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'li', 'a', 'button', 'label', 'strong', 'em']);
+const TEXT_TAGS = new Set([
+  'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'span', 'li', 'a', 'button', 'label', 'strong', 'em',
+]);
 
 function findTextAncestor(el: Element | null): HTMLElement | null {
   let node: Element | null = el;
@@ -14,6 +17,14 @@ function findTextAncestor(el: Element | null): HTMLElement | null {
   }
   return null;
 }
+
+// Styles that may come from ancestor selectors and need explicit copying
+const INHERITED = [
+  'text-align', 'color', 'font-size', 'font-family', 'font-weight',
+  'font-style', 'line-height', 'letter-spacing', 'word-spacing',
+  '-webkit-text-fill-color', 'background-clip', '-webkit-background-clip',
+  'background-image', 'background',
+];
 
 const GlassCursor = () => {
   const cursorRef     = useRef<HTMLDivElement>(null);
@@ -29,23 +40,22 @@ const GlassCursor = () => {
   if (isTouchDevice()) return null;
 
   useEffect(() => {
+    // position:fixed overlay — escapes every overflow:hidden/clip in the tree
+    const overlay = document.createElement('div');
+    overlay.style.cssText =
+      'position:fixed;pointer-events:none;z-index:9997;opacity:0;transition:opacity 0.1s ease;overflow:visible;';
+    document.body.appendChild(overlay);
+
     const handleMouseMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
       if (!visible) setVisible(true);
     };
     const handleMouseLeave = () => {
       setVisible(false);
-      unzoom();
+      overlay.style.opacity = '0';
+      zoomedEl.current = null;
     };
     const handleMouseEnter = () => setVisible(true);
-
-    const unzoom = () => {
-      if (zoomedEl.current) {
-        zoomedEl.current.style.transform = '';
-        zoomedEl.current.style.transformOrigin = '';
-        zoomedEl.current = null;
-      }
-    };
 
     const animate = () => {
       if (cursorRef.current) {
@@ -61,34 +71,42 @@ const GlassCursor = () => {
           `translate(${trailPos.current.x}px, ${trailPos.current.y}px)`;
       }
 
-      // Real text magnification: use actual mouse pos for accurate hit detection
+      // Hit-test at actual cursor position (not trail — no lag)
       const el = document.elementFromPoint(pos.current.x, pos.current.y);
       const target = findTextAncestor(el);
 
-      if (target !== zoomedEl.current) {
-        // Restore previous
-        if (zoomedEl.current) {
-          zoomedEl.current.style.transform = '';
-          zoomedEl.current.style.transformOrigin = '';
-          zoomedEl.current.style.zIndex = '';
-        }
-        // Zoom new target
-        if (target) {
-          const rect = target.getBoundingClientRect();
-          const ox = pos.current.x - rect.left;
-          const oy = pos.current.y - rect.top;
-          target.style.transformOrigin = `${ox}px ${oy}px`;
-          target.style.transform = 'scale(1.3)';
-          target.style.zIndex = '10';
-          target.style.transition = 'transform 0.12s ease';
-        }
-        zoomedEl.current = target;
-      } else if (target) {
-        // Update transform-origin live as cursor moves within the element
+      if (target) {
         const rect = target.getBoundingClientRect();
         const ox = pos.current.x - rect.left;
         const oy = pos.current.y - rect.top;
-        target.style.transformOrigin = `${ox}px ${oy}px`;
+
+        // Rebuild clone only when we move to a new element
+        if (target !== zoomedEl.current) {
+          const clone = target.cloneNode(true) as HTMLElement;
+          // Copy ancestor-inherited styles so clone looks right outside its original context
+          const cs = getComputedStyle(target);
+          INHERITED.forEach(p => {
+            try { clone.style.setProperty(p, cs.getPropertyValue(p)); } catch { /* skip */ }
+          });
+          clone.style.margin = '0';
+          clone.style.transform = 'none';
+          clone.style.transition = 'none';
+          overlay.innerHTML = '';
+          overlay.appendChild(clone);
+          zoomedEl.current = target;
+        }
+
+        // Position overlay exactly over the original element, then scale from cursor point
+        overlay.style.left   = `${rect.left}px`;
+        overlay.style.top    = `${rect.top}px`;
+        overlay.style.width  = `${rect.width}px`;
+        overlay.style.height = `${rect.height}px`;
+        overlay.style.transformOrigin = `${ox}px ${oy}px`;
+        overlay.style.transform = 'scale(1.5)';
+        overlay.style.opacity = '1';
+      } else {
+        overlay.style.opacity = '0';
+        zoomedEl.current = null;
       }
 
       raf.current = requestAnimationFrame(animate);
@@ -100,10 +118,9 @@ const GlassCursor = () => {
     raf.current = requestAnimationFrame(animate);
 
     const addHoverListeners = () => {
-      const els = document.querySelectorAll(
+      document.querySelectorAll(
         'a, button, input, textarea, [role="button"], .interactive'
-      );
-      els.forEach((el) => {
+      ).forEach((el) => {
         el.addEventListener('mouseenter', () => {
           innerRef.current?.classList.add('cursor--hover');
           trailInnerRef.current?.classList.add('trail--hover');
@@ -125,7 +142,7 @@ const GlassCursor = () => {
       document.removeEventListener('mouseenter', handleMouseEnter);
       cancelAnimationFrame(raf.current);
       observer.disconnect();
-      unzoom();
+      overlay.remove();
     };
   }, [visible]);
 
