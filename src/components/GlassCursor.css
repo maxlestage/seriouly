@@ -46,7 +46,7 @@
     background 0.3s ease;
 }
 
-/* --- Large trail: see-through glass with zoom --- */
+/* --- Large trail: verre 3D avec reflets --- */
 .glass-trail {
   width: 140px;
   height: 140px;
@@ -54,28 +54,65 @@
   margin-left: -70px;
   border-radius: 50%;
   pointer-events: none;
+  position: relative;
 
-  /* Fully transparent — you see through */
-  background: transparent;
+  /* Verre semi-transparent avec reflet haut-gauche */
+  background:
+    radial-gradient(circle at 28% 22%,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.03) 45%,
+      transparent 70%),
+    rgba(255, 255, 255, 0.04);
 
-  /* See-through zoom: no blur, just brighten what's behind */
-  backdrop-filter: blur(0px) brightness(1.1) contrast(1.04) saturate(1.2);
-  -webkit-backdrop-filter: blur(0px) brightness(1.1) contrast(1.04) saturate(1.2);
+  /* Verre — légère distorsion de ce qui est derrière */
+  backdrop-filter: blur(3px) brightness(1.12) saturate(1.3) contrast(1.04);
+  -webkit-backdrop-filter: blur(3px) brightness(1.12) saturate(1.3) contrast(1.04);
 
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  /* Bordures 3D verre : claire haut-gauche, sombre bas-droite */
+  border: 1px solid transparent;
+  border-top-color:    rgba(255, 255, 255, 0.32);
+  border-left-color:   rgba(255, 255, 255, 0.20);
+  border-right-color:  rgba(255, 255, 255, 0.06);
+  border-bottom-color: rgba(255, 255, 255, 0.03);
 
   box-shadow:
-    0 0 24px rgba(200, 80, 192, 0.08),
-    inset 0 0 20px rgba(255, 255, 255, 0.02);
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 0 40px rgba(200, 80, 192, 0.12),
+    inset 0 2px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.10);
 
-  /* Zoom pulse */
   animation: trailZoom 4s ease-in-out infinite;
 
   transition:
     width 0.4s ease,
     height 0.4s ease,
     margin 0.4s ease,
-    border-color 0.4s ease;
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* Lumière de refraction qui tourne sur le bord du verre */
+.glass-trail::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from var(--trail-angle, 0deg),
+    rgba(255, 255, 255, 0.18) 0deg,
+    transparent 50deg,
+    rgba(200, 80, 192, 0.10) 180deg,
+    transparent 230deg,
+    rgba(255, 255, 255, 0.10) 310deg,
+    transparent 360deg
+  );
+  pointer-events: none;
+  animation: trailRefract 6s linear infinite;
+}
+
+@keyframes trailRefract {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 /* ===== Zoom animations ===== */
