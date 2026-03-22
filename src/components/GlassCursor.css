@@ -46,7 +46,7 @@
     background 0.3s ease;
 }
 
-/* --- Large trail: loupe — sans blanc, effet zoom visuel fort --- */
+/* --- Large trail: loupe --- */
 .glass-trail {
   width: 140px;
   height: 140px;
@@ -85,6 +85,25 @@
     height 0.4s ease,
     margin 0.4s ease,
     box-shadow 0.4s ease;
+}
+
+/* ===== Lens interior — clipped to circle, shows zoomed clone ===== */
+
+.glass-trail__lens {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  /* Dark panel covers the backdrop-filter output so clone renders cleanly */
+  background: transparent;
+}
+
+.glass-trail__lens.active {
+  background: rgba(8, 3, 18, 0.93);
+  opacity: 1;
 }
 
 /* ===== Zoom animations ===== */
