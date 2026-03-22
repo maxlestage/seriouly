@@ -18,12 +18,12 @@ function findTextAncestor(el: Element | null): HTMLElement | null {
   return null;
 }
 
-// Styles that may come from ancestor selectors and need explicit copying
+// Styles that may come from ancestor CSS selectors — copy them explicitly
 const INHERITED = [
   'text-align', 'color', 'font-size', 'font-family', 'font-weight',
   'font-style', 'line-height', 'letter-spacing', 'word-spacing',
   '-webkit-text-fill-color', 'background-clip', '-webkit-background-clip',
-  'background-image', 'background',
+  'background-image',
 ];
 
 const GlassCursor = () => {
@@ -31,30 +31,31 @@ const GlassCursor = () => {
   const innerRef      = useRef<HTMLDivElement>(null);
   const trailRef      = useRef<HTMLDivElement>(null);
   const trailInnerRef = useRef<HTMLDivElement>(null);
-  const pos      = useRef({ x: -200, y: -200 });
-  const trailPos = useRef({ x: -200, y: -200 });
-  const raf      = useRef<number>(0);
-  const zoomedEl = useRef<HTMLElement | null>(null);
+  const lensRef       = useRef<HTMLDivElement>(null);
+  const pos        = useRef({ x: -200, y: -200 });
+  const trailPos   = useRef({ x: -200, y: -200 });
+  const raf        = useRef<number>(0);
+  const zoomedEl   = useRef<HTMLElement | null>(null);
+  const lensClone  = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
 
   if (isTouchDevice()) return null;
 
   useEffect(() => {
-    // position:fixed overlay — escapes every overflow:hidden/clip in the tree
-    const overlay = document.createElement('div');
-    overlay.style.cssText =
-      'position:fixed;pointer-events:none;z-index:9997;opacity:0;transition:opacity 0.1s ease;overflow:visible;';
-    document.body.appendChild(overlay);
+    const clearLens = () => {
+      if (lensRef.current) {
+        lensRef.current.innerHTML = '';
+        lensRef.current.classList.remove('active');
+      }
+      zoomedEl.current = null;
+      lensClone.current = null;
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
       if (!visible) setVisible(true);
     };
-    const handleMouseLeave = () => {
-      setVisible(false);
-      overlay.style.opacity = '0';
-      zoomedEl.current = null;
-    };
+    const handleMouseLeave = () => { setVisible(false); clearLens(); };
     const handleMouseEnter = () => setVisible(true);
 
     const animate = () => {
@@ -71,42 +72,49 @@ const GlassCursor = () => {
           `translate(${trailPos.current.x}px, ${trailPos.current.y}px)`;
       }
 
-      // Hit-test at actual cursor position (not trail — no lag)
       const el = document.elementFromPoint(pos.current.x, pos.current.y);
       const target = findTextAncestor(el);
+      const lens = lensRef.current;
 
-      if (target) {
+      if (lens && target) {
         const rect = target.getBoundingClientRect();
-        const ox = pos.current.x - rect.left;
-        const oy = pos.current.y - rect.top;
+        // Trail center = loupe center in viewport coords
+        const tx = trailPos.current.x;
+        const ty = trailPos.current.y;
 
-        // Rebuild clone only when we move to a new element
+        // Rebuild clone only when element changes
         if (target !== zoomedEl.current) {
           const clone = target.cloneNode(true) as HTMLElement;
-          // Copy ancestor-inherited styles so clone looks right outside its original context
+          // Copy styles that may come from ancestor CSS selectors
           const cs = getComputedStyle(target);
           INHERITED.forEach(p => {
-            try { clone.style.setProperty(p, cs.getPropertyValue(p)); } catch { /* skip */ }
+            try { clone.style.setProperty(p, cs.getPropertyValue(p)); } catch { /* noop */ }
           });
+          clone.style.position = 'absolute';
           clone.style.margin = '0';
           clone.style.transform = 'none';
           clone.style.transition = 'none';
-          overlay.innerHTML = '';
-          overlay.appendChild(clone);
+          lens.innerHTML = '';
+          lens.appendChild(clone);
+          lensClone.current = clone;
           zoomedEl.current = target;
+          lens.classList.add('active');
         }
 
-        // Position overlay exactly over the original element, then scale from cursor point
-        overlay.style.left   = `${rect.left}px`;
-        overlay.style.top    = `${rect.top}px`;
-        overlay.style.width  = `${rect.width}px`;
-        overlay.style.height = `${rect.height}px`;
-        overlay.style.transformOrigin = `${ox}px ${oy}px`;
-        overlay.style.transform = 'scale(1.5)';
-        overlay.style.opacity = '1';
-      } else {
-        overlay.style.opacity = '0';
-        zoomedEl.current = null;
+        // Position clone every frame so loupe-center maps to the text at cursor
+        // glass-trail is 140×140 with margin -70/-70, so its local center = (70, 70)
+        // Clone left/top: offset from glass-trail's viewport top-left = (tx-70, ty-70)
+        const clone = lensClone.current;
+        if (clone) {
+          clone.style.left  = `${rect.left - tx + 70}px`;
+          clone.style.top   = `${rect.top  - ty + 70}px`;
+          clone.style.width = `${rect.width}px`;
+          // Scale origin = trail center in clone-local coords → maps to (70,70) in glass-trail
+          clone.style.transformOrigin = `${tx - rect.left}px ${ty - rect.top}px`;
+          clone.style.transform = 'scale(2)';
+        }
+      } else if (lens) {
+        clearLens();
       }
 
       raf.current = requestAnimationFrame(animate);
@@ -142,14 +150,16 @@ const GlassCursor = () => {
       document.removeEventListener('mouseenter', handleMouseEnter);
       cancelAnimationFrame(raf.current);
       observer.disconnect();
-      overlay.remove();
     };
   }, [visible]);
 
   return (
     <>
       <div ref={trailRef} className="gc-wrap" style={{ opacity: visible ? 1 : 0 }}>
-        <div ref={trailInnerRef} className="glass-trail" />
+        <div ref={trailInnerRef} className="glass-trail">
+          {/* Lens interior: clipped to the circle, shows zoomed text clone */}
+          <div ref={lensRef} className="glass-trail__lens" />
+        </div>
       </div>
       <div ref={cursorRef} className="gc-wrap" style={{ opacity: visible ? 1 : 0 }}>
         <div ref={innerRef} className="glass-cursor" />
