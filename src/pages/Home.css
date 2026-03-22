@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: clip; /* clip: coupe les orbes sans bloquer le scale du loupe */
   padding: 120px 40px 80px;
 }
 
