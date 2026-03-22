@@ -4,6 +4,17 @@ import './GlassCursor.css';
 const isTouchDevice = () =>
   window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
+const TEXT_TAGS = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'li', 'a', 'button', 'label', 'strong', 'em']);
+
+function findTextAncestor(el: Element | null): HTMLElement | null {
+  let node: Element | null = el;
+  while (node && node !== document.body) {
+    if (TEXT_TAGS.has(node.tagName.toLowerCase())) return node as HTMLElement;
+    node = node.parentElement;
+  }
+  return null;
+}
+
 const GlassCursor = () => {
   const cursorRef     = useRef<HTMLDivElement>(null);
   const innerRef      = useRef<HTMLDivElement>(null);
@@ -12,6 +23,7 @@ const GlassCursor = () => {
   const pos      = useRef({ x: -200, y: -200 });
   const trailPos = useRef({ x: -200, y: -200 });
   const raf      = useRef<number>(0);
+  const zoomedEl = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
 
   if (isTouchDevice()) return null;
@@ -21,8 +33,19 @@ const GlassCursor = () => {
       pos.current = { x: e.clientX, y: e.clientY };
       if (!visible) setVisible(true);
     };
-    const handleMouseLeave = () => setVisible(false);
+    const handleMouseLeave = () => {
+      setVisible(false);
+      unzoom();
+    };
     const handleMouseEnter = () => setVisible(true);
+
+    const unzoom = () => {
+      if (zoomedEl.current) {
+        zoomedEl.current.style.transform = '';
+        zoomedEl.current.style.transformOrigin = '';
+        zoomedEl.current = null;
+      }
+    };
 
     const animate = () => {
       if (cursorRef.current) {
@@ -36,6 +59,37 @@ const GlassCursor = () => {
       if (trailRef.current) {
         trailRef.current.style.transform =
           `translate(${trailPos.current.x}px, ${trailPos.current.y}px)`;
+      }
+
+      // Real text magnification: scale the element under the loupe center
+      const el = document.elementFromPoint(trailPos.current.x, trailPos.current.y);
+      const target = findTextAncestor(el);
+
+      if (target !== zoomedEl.current) {
+        // Restore previous
+        if (zoomedEl.current) {
+          zoomedEl.current.style.transform = '';
+          zoomedEl.current.style.transformOrigin = '';
+        }
+        // Zoom new target
+        if (target) {
+          const rect = target.getBoundingClientRect();
+          const ox = trailPos.current.x - rect.left;
+          const oy = trailPos.current.y - rect.top;
+          target.style.transformOrigin = `${ox}px ${oy}px`;
+          target.style.transform = 'scale(1.18)';
+          // Smooth via CSS transition already or inline
+          if (!target.style.transition.includes('transform')) {
+            target.style.transition = 'transform 0.15s ease, transform-origin 0.15s ease';
+          }
+        }
+        zoomedEl.current = target;
+      } else if (target && zoomedEl.current === target) {
+        // Update transform-origin as cursor moves within the element
+        const rect = target.getBoundingClientRect();
+        const ox = trailPos.current.x - rect.left;
+        const oy = trailPos.current.y - rect.top;
+        target.style.transformOrigin = `${ox}px ${oy}px`;
       }
 
       raf.current = requestAnimationFrame(animate);
@@ -72,6 +126,7 @@ const GlassCursor = () => {
       document.removeEventListener('mouseenter', handleMouseEnter);
       cancelAnimationFrame(raf.current);
       observer.disconnect();
+      unzoom();
     };
   }, [visible]);
 
