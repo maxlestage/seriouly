@@ -69,28 +69,78 @@
   max-width: 800px;
 }
 
-/* Logo */
+/* Logo — disque de verre 3D */
 .hero__logo-wrapper {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 48px;
   will-change: transform, opacity;
+
+  /* Disque verre */
+  padding: 40px;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(circle at 28% 22%,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.04) 45%,
+      transparent 70%),
+    rgba(255, 255, 255, 0.05);
+
+  backdrop-filter: blur(28px) saturate(1.6) brightness(1.05);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6) brightness(1.05);
+
+  border: 1px solid transparent;
+  border-top-color:    rgba(255, 255, 255, 0.22);
+  border-left-color:   rgba(255, 255, 255, 0.14);
+  border-right-color:  rgba(255, 255, 255, 0.04);
+  border-bottom-color: rgba(255, 255, 255, 0.01);
+
+  box-shadow:
+    0 12px 60px rgba(0, 0, 0, 0.4),
+    0 0 100px rgba(190, 50, 240, 0.22),
+    inset 0 2px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.14);
+
+  animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Refraction arc — lumière qui passe à travers le verre */
+.hero__logo-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 130deg,
+    rgba(255, 255, 255, 0.12) 0deg,
+    transparent 60deg,
+    rgba(200, 80, 192, 0.07) 180deg,
+    transparent 240deg,
+    rgba(255, 255, 255, 0.06) 300deg,
+    transparent 360deg
+  );
+  pointer-events: none;
 }
 
 .hero__logo {
   width: 160px;
   height: 160px;
-  filter: drop-shadow(0 0 40px rgba(200, 80, 192, 0.3));
+  filter: drop-shadow(0 0 40px rgba(200, 80, 192, 0.4));
   mix-blend-mode: lighten;
-  animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  position: relative;
+  z-index: 1;
 }
 
 .hero__logo-glow {
   position: absolute;
-  inset: -40px;
+  inset: -50px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(200, 80, 192, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(200, 80, 192, 0.18) 0%, transparent 70%);
   animation: glowPulse 4s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes logoReveal {
@@ -308,81 +358,88 @@
   border-radius: 20px;
   overflow: hidden;
   transform-style: preserve-3d;
-  perspective: 800px;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s ease;
+  perspective: 600px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
 
-  /* 3D Glass — multi-layer */
   background:
-    /* specular reflet top */
     linear-gradient(165deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.02) 40%,
+      rgba(255, 255, 255, 0.10) 0%,
+      rgba(255, 255, 255, 0.03) 40%,
       transparent 60%),
-    /* base glass */
-    rgba(255, 255, 255, 0.03);
+    rgba(255, 255, 255, 0.04);
 
-  backdrop-filter: blur(20px) saturate(1.4) brightness(1.03);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4) brightness(1.03);
+  backdrop-filter: blur(20px) saturate(1.5) brightness(1.04);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5) brightness(1.04);
 
-  /* 3D borders — light top-left, dark bottom-right */
   border: 1px solid transparent;
-  border-top-color: rgba(255, 255, 255, 0.12);
-  border-left-color: rgba(255, 255, 255, 0.08);
-  border-right-color: rgba(255, 255, 255, 0.03);
+  border-top-color:    rgba(255, 255, 255, 0.16);
+  border-left-color:   rgba(255, 255, 255, 0.10);
+  border-right-color:  rgba(255, 255, 255, 0.03);
   border-bottom-color: rgba(255, 255, 255, 0.01);
 
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.2),
-    0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    0 6px 24px rgba(0, 0, 0, 0.28),
+    0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
 }
 
-/* Glass reflet shine — moves on hover */
+/* Shine qui glisse sur le verre au hover */
 .feature-card::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
   background: radial-gradient(
-    ellipse 30% 20% at 30% 30%,
-    rgba(255, 255, 255, 0.07) 0%,
-    transparent 60%
+    ellipse 35% 25% at 30% 25%,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 65%
   );
   pointer-events: none;
-  transition: transform 0.6s ease;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  opacity: 0.6;
 }
 
-/* Bottom edge light — like a glass sits on a surface */
+/* Arête lumineuse bas */
 .feature-card::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 10%;
-  width: 80%;
+  left: 8%;
+  width: 84%;
   height: 1px;
   background: linear-gradient(90deg,
     transparent,
-    rgba(200, 80, 192, 0.15),
+    rgba(200, 80, 192, 0.25),
     transparent);
   pointer-events: none;
+  transition: opacity 0.4s ease;
+  opacity: 0.6;
 }
 
 .feature-card:hover {
-  transform: translateY(-8px) rotateX(2deg);
-  border-top-color: rgba(231, 127, 191, 0.2);
+  transform: translateY(-14px) rotateX(10deg) rotateY(-4deg);
+  border-top-color:   rgba(231, 127, 191, 0.35);
+  border-left-color:  rgba(255, 255, 255, 0.18);
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.3),
-    0 0 40px rgba(200, 80, 192, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    0 0 60px rgba(200, 80, 192, 0.14),
+    0 0 0 1px rgba(200, 80, 192, 0.08),
+    inset 0 2px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.16);
 }
 
 .feature-card:hover::before {
-  transform: translate(5%, 5%);
+  transform: translate(12%, 8%);
+  opacity: 1;
+}
+
+.feature-card:hover::after {
+  opacity: 1;
 }
 
 .feature-card__icon {
@@ -698,12 +755,13 @@
   }
 
   .hero__logo {
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
   }
 
   .hero__logo-wrapper {
     margin-bottom: 32px;
+    padding: 28px;
   }
 
   /* Touch target minimum 44px */
