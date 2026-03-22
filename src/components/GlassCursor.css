@@ -87,6 +87,23 @@
     box-shadow 0.4s ease;
 }
 
+/* ===== Lens interior — clipped to circle ===== */
+
+.glass-trail__lens {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  background: transparent;
+}
+
+.glass-trail__lens.active {
+  opacity: 1;
+}
+
 /* ===== Zoom animations ===== */
 
 @keyframes cursorZoom {
