@@ -1,5 +1,63 @@
 /* ===== Seriously Web — Global Styles ===== */
 
+/* Butler Font */
+@font-face {
+  font-family: 'Butler';
+  src: url('./assets/fonts/Butler-Free-Lgt.woff2') format('woff2'),
+       url('./assets/fonts/Butler-Free-Lgt.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Butler';
+  src: url('./assets/fonts/Butler-Free-Rmn.woff2') format('woff2'),
+       url('./assets/fonts/Butler-Free-Rmn.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Butler';
+  src: url('./assets/fonts/Butler-Free-Med.woff2') format('woff2'),
+       url('./assets/fonts/Butler-Free-Med.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Butler';
+  src: url('./assets/fonts/Butler-Free-SBd.woff2') format('woff2'),
+       url('./assets/fonts/Butler-Free-SBd.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Butler';
+  src: url('./assets/fonts/Butler-Free-Bd.woff2') format('woff2'),
+       url('./assets/fonts/Butler-Free-Bd.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Butler';
+  src: url('./assets/fonts/Butler-Free-XBd.woff2') format('woff2'),
+       url('./assets/fonts/Butler-Free-XBd.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Butler';
+  src: url('./assets/fonts/Butler-Free-Blk.woff2') format('woff2'),
+       url('./assets/fonts/Butler-Free-Blk.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg-deep: #0d0515;
   --bg-dark: #1a0a2e;
@@ -13,8 +71,8 @@
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.55);
   --text-muted: rgba(255, 255, 255, 0.3);
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Butler', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Butler', 'Playfair Display', Georgia, serif;
   --build-version: "1.0.0";
 }
 
@@ -22,6 +80,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Butler', sans-serif !important;
 }
 
 html {
@@ -34,7 +93,8 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: 'Butler', var(--font-sans);
+  font-weight: 400;
   background: var(--bg-deep);
   color: var(--text-primary);
   width: 100%;
