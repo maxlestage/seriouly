@@ -1,4 +1,4 @@
-import { useRef, type MouseEvent, type ReactNode } from 'react';
+import { useRef, useState, type MouseEvent, type ReactNode } from 'react';
 import './GlassCard.css';
 
 interface GlassCardProps {
@@ -9,6 +9,7 @@ interface GlassCardProps {
 const GlassCard = ({ children, className = '' }: GlassCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const shineRef = useRef<HTMLDivElement>(null);
+  const [touched, setTouched] = useState(false);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const card = cardRef.current;
@@ -50,9 +51,11 @@ const GlassCard = ({ children, className = '' }: GlassCardProps) => {
   return (
     <div
       ref={cardRef}
-      className={`glass-card interactive ${className}`}
+      className={`glass-card interactive ${className}${touched ? ' is-touched' : ''}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={() => setTouched(true)}
+      onTouchEnd={() => setTimeout(() => setTouched(false), 400)}
     >
       <div ref={shineRef} className="glass-card__shine" />
       <div className="glass-card__content">
