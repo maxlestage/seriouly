@@ -8,29 +8,29 @@
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.4s ease;
 
-  /* 3D Glass — multi-layer */
+  /* 3D Glass — iOS style frosted glass */
   background:
     linear-gradient(165deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.02) 40%,
-      transparent 60%),
-    rgba(255, 255, 255, 0.03);
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.08) 40%,
+      rgba(255, 255, 255, 0.04) 60%),
+    rgba(255, 255, 255, 0.08);
 
-  backdrop-filter: blur(20px) saturate(1.4) brightness(1.03);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4) brightness(1.03);
+  backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
 
   /* 3D borders — light top-left, dark bottom-right */
-  border: 1px solid transparent;
-  border-top-color: rgba(255, 255, 255, 0.12);
-  border-left-color: rgba(255, 255, 255, 0.08);
-  border-right-color: rgba(255, 255, 255, 0.03);
-  border-bottom-color: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-top-color: rgba(255, 255, 255, 0.25);
+  border-left-color: rgba(255, 255, 255, 0.15);
+  border-right-color: rgba(255, 255, 255, 0.08);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
 
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.2),
-    0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
 }
 
 /* Specular shine layer — positioned by JS */
