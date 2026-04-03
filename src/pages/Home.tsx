@@ -69,11 +69,11 @@ const Home = () => {
             <span className="hero__badge-dot" />
             <span className="hero__badge-build">Date {BUILD_DATE} · v1.0.0</span>
           </div>
-        </div>
 
-        <div className="hero__scroll-hint">
-          <div className="hero__scroll-line" />
-          <span className="hero__scroll-text">Scroll</span>
+          <div className="hero__scroll-hint">
+            <div className="hero__scroll-line" />
+            <span className="hero__scroll-text">Scroll</span>
+          </div>
         </div>
       </section>
 
