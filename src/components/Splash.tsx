@@ -8,9 +8,9 @@ const Splash = () => {
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
-    // Start fade-out after 1.6s, remove from DOM after 2.2s
-    const fadeTimer = setTimeout(() => setFading(true), 1600);
-    const hideTimer = setTimeout(() => setVisible(false), 2200);
+    // Start fade-out after 800ms, remove from DOM after 1200ms
+    const fadeTimer = setTimeout(() => setFading(true), 800);
+    const hideTimer = setTimeout(() => setVisible(false), 1200);
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(hideTimer);

@@ -31,17 +31,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
-  /* Légèrement au-dessus du centre — comme dans l'image */
+  gap: 24px;
   margin-top: -10vh;
 }
 
 .splash__logo {
-  width: 220px;
-  height: 220px;
+  width: 180px;
+  height: 180px;
   mix-blend-mode: lighten;
   filter: drop-shadow(0 0 60px rgba(180, 60, 220, 0.35));
-  animation: splashLogoIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .splash__name {
@@ -50,15 +48,4 @@
   font-weight: 300;
   color: #ffffff;
   letter-spacing: 0.04em;
-  animation: splashTextIn 0.5s 0.3s ease both;
-}
-
-@keyframes splashLogoIn {
-  0%   { opacity: 0; transform: scale(0.8) translateY(28px); }
-  100% { opacity: 1; transform: scale(1)   translateY(0); }
-}
-
-@keyframes splashTextIn {
-  0%   { opacity: 0; transform: translateY(12px); }
-  100% { opacity: 1; transform: translateY(0); }
 }
