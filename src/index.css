@@ -59,7 +59,7 @@
 }
 
 :root {
-  --bg-deep: #0d0515;
+  --bg-deep: #1a0f2e;
   --bg-dark: #1a0a2e;
   --bg-card: rgba(255, 255, 255, 0.04);
   --bg-glass: rgba(255, 255, 255, 0.06);
@@ -100,6 +100,7 @@ body {
   color: var(--text-primary);
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
