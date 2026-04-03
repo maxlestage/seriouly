@@ -814,11 +814,11 @@
   }
 
   .features {
-    padding: 60px 16px;
+    padding: 40px 16px;
   }
 
   .features__title {
-    margin-bottom: 40px;
+    margin-bottom: 28px;
   }
 
   .feature-card {
@@ -826,7 +826,7 @@
   }
 
   .licences {
-    padding: 60px 16px;
+    padding: 40px 16px;
   }
 
   .licences__card {
@@ -835,12 +835,12 @@
 
   .licences__techs {
     padding: 28px 20px;
-    margin-top: 40px;
+    margin-top: 32px;
   }
 
   .download {
-    padding: 80px 20px;
-    padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+    padding: 40px 20px;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 40px);
   }
 
   .download__inner {
