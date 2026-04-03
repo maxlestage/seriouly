@@ -91,6 +91,7 @@ html {
   height: 100%;
   overflow-x: hidden;
   scroll-padding-top: 72px;
+  background: var(--bg-deep);
 }
 
 body {
@@ -109,11 +110,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Dark purple gradient background — fidèle à l'image de l'app */
+/* Dark purple gradient background — couvre les safe-areas iOS */
 body::before {
   content: '';
   position: fixed;
-  inset: 0;
+  top: -50px;
+  left: -50px;
+  right: -50px;
+  bottom: -50px;
   z-index: -2;
   background:
     /* Orbe violet-rose fort en haut à gauche */
@@ -126,11 +130,14 @@ body::before {
     linear-gradient(175deg, #1a1030 0%, #0c0618 45%, #110826 75%, #18102e 100%);
 }
 
-/* Subtle noise texture */
+/* Subtle noise texture — couvre les safe-areas iOS */
 body::after {
   content: '';
   position: fixed;
-  inset: 0;
+  top: -50px;
+  left: -50px;
+  right: -50px;
+  bottom: -50px;
   z-index: -1;
   opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
