@@ -40,7 +40,9 @@ jobs:
         run: cd admin && npm run build
 
       - name: Copy admin build into main dist
-        run: cp -r admin/dist dist/admin
+        run: |
+          mkdir -p dist/admin
+          cp -r admin/dist/* dist/admin/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
