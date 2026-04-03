@@ -73,7 +73,7 @@
   --text-muted: rgba(255, 255, 255, 0.3);
   --font-sans: 'Butler', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-serif: 'Butler', 'Playfair Display', Georgia, serif;
-  --build-version: "1.0.0";
+  --build-version: "0.0.1";
 }
 
 *, *::before, *::after {
