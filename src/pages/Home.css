@@ -3,6 +3,7 @@
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -741,17 +742,35 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 100px 20px 60px;
-    padding-top: calc(env(safe-area-inset-top) + 100px);
+    min-height: 100dvh;
+    padding: 80px 20px 40px;
+    padding-top: calc(env(safe-area-inset-top) + 80px);
   }
 
   .hero__logo {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
   }
 
   .hero__logo-wrapper {
-    margin-bottom: 32px;
+    margin-bottom: 20px;
+  }
+
+  .hero__title {
+    margin-bottom: 16px;
+  }
+
+  .hero__subtitle {
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+
+  .hero__badge {
+    margin-top: 28px;
+  }
+
+  .hero__scroll-hint {
+    margin-top: 16px;
   }
 
   /* Touch target minimum 44px */
