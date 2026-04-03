@@ -30,8 +30,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Install admin dependencies
+        run: cd admin && npm ci
+
+      - name: Build main app
         run: npm run build
+
+      - name: Build admin app
+        run: cd admin && npm run build
+
+      - name: Copy admin build into main dist
+        run: cp -r admin/dist dist/admin
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
