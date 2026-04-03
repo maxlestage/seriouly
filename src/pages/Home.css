@@ -759,17 +759,17 @@
   }
 
   .hero__logo {
-    width: 90px;
-    height: 90px;
+    width: 140px;
+    height: 140px;
   }
 
   .hero__logo-wrapper {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .hero__title {
-    font-size: clamp(2rem, 8vw, 3.5rem);
-    margin-bottom: 12px;
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    margin-bottom: 14px;
   }
 
   .hero__subtitle {
