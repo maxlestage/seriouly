@@ -743,51 +743,73 @@
 @media (max-width: 768px) {
   .hero {
     min-height: 100dvh;
-    padding: 80px 20px 40px;
-    padding-top: calc(env(safe-area-inset-top) + 80px);
+    padding: 80px 20px 32px;
+    padding-top: calc(env(safe-area-inset-top) + 72px);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
 
   .hero__logo {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
 
   .hero__logo-wrapper {
-    margin-bottom: 20px;
-  }
-
-  .hero__title {
     margin-bottom: 16px;
   }
 
+  .hero__title {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    margin-bottom: 12px;
+  }
+
   .hero__subtitle {
-    margin-bottom: 24px;
-    font-size: 0.95rem;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .hero__badge {
-    margin-top: 28px;
+    margin-top: 20px;
+    padding: 6px 12px;
+    font-size: 0.7rem;
   }
 
   .hero__scroll-hint {
-    margin-top: 16px;
+    margin-top: 12px;
+  }
+
+  .hero__scroll-line {
+    height: 28px;
+  }
+
+  .hero__scroll-text {
+    font-size: 0.6rem;
   }
 
   /* Touch target minimum 44px */
   .hero__cta {
-    min-height: 52px;
-    padding: 14px 28px;
-    font-size: 1rem;
+    min-height: 44px;
+    padding: 12px 24px;
+    font-size: 0.9rem;
   }
 
   .hero__cta-group {
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
 
   .hero__cta--outline {
-    min-height: 52px;
+    min-height: 44px;
   }
 
   .features {
