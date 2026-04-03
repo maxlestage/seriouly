@@ -8,6 +8,7 @@
   justify-content: center;
   overflow: clip; /* clip: coupe les orbes sans bloquer le scale du loupe */
   padding: 120px 40px 80px;
+  scroll-snap-align: center;
 }
 
 /* Animated gradient orbs */
@@ -67,6 +68,7 @@
   z-index: 2;
   text-align: center;
   max-width: 800px;
+  margin: 0 auto;
 }
 
 /* Logo */
@@ -282,6 +284,7 @@
 
 .features {
   padding: 120px 40px;
+  scroll-snap-align: start;
 }
 
 .features__inner {
@@ -455,6 +458,7 @@
 
 .licences {
   padding: 120px 40px;
+  scroll-snap-align: start;
 }
 
 .licences__inner {
@@ -619,6 +623,7 @@
 .download {
   padding: 120px 40px;
   position: relative;
+  scroll-snap-align: start;
 }
 
 .download__inner {
