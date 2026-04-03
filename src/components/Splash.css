@@ -2,18 +2,14 @@
 
 .splash {
   position: fixed;
-  inset: 0;
+  top: -50px;
+  left: -50px;
+  right: -50px;
+  bottom: -50px;
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  /* Couvrir les safe areas iOS */
-  top: env(safe-area-inset-top, 0);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 
   /* Reproduit le fond de l'image : dégradé violet sombre */
   background:
