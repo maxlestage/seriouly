@@ -4,7 +4,7 @@ import './Footer.css';
 
 const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
 
-const BUILD_VERSION = '1.0.0';
+const BUILD_VERSION = '0.0.1';
 const CURRENT_YEAR = new Date().getFullYear();
 const BUILD_DATE = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
