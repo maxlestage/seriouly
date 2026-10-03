@@ -85,7 +85,7 @@
   width: 160px;
   height: 160px;
   filter: drop-shadow(0 0 40px rgba(200, 80, 192, 0.3));
-  mix-blend-mode: lighten;
+  mix-blend-mode: var(--logo-blend);
   animation: logoReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -190,25 +190,27 @@
 }
 
 .hero__cta--outline {
+  color: var(--text-primary);
   background:
-    linear-gradient(165deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 50%, transparent 80%),
-    rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.20);
+    linear-gradient(165deg, rgba(var(--glass-rgb), 0.12) 0%, rgba(var(--glass-rgb), 0.03) 50%, transparent 80%),
+    rgba(var(--glass-rgb), 0.06);
+  border: 1px solid rgba(var(--glass-rgb), 0.20);
   backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
   -webkit-backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 4px 20px rgba(var(--shade-rgb), 0.15),
+    inset 0 1px 0 rgba(var(--glass-rgb), 0.15);
 }
 
 .hero__cta--outline:hover {
+  color: var(--text-primary);
   background:
-    linear-gradient(165deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.05) 50%, transparent 80%),
-    rgba(255, 255, 255, 0.10);
+    linear-gradient(165deg, rgba(var(--glass-rgb), 0.18) 0%, rgba(var(--glass-rgb), 0.05) 50%, transparent 80%),
+    rgba(var(--glass-rgb), 0.10);
   border-color: rgba(200, 80, 192, 0.4);
   box-shadow:
     0 12px 32px rgba(200, 80, 192, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.20);
+    inset 0 1px 0 rgba(var(--glass-rgb), 0.20);
 }
 
 /* Badge */
@@ -220,14 +222,14 @@
   padding: 8px 16px;
   font-size: 0.8rem;
   color: var(--text-muted);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(var(--glass-rgb), 0.15);
   border-radius: 24px;
   background:
-    linear-gradient(165deg, rgba(255, 255, 255, 0.10) 0%, transparent 60%),
-    rgba(255, 255, 255, 0.06);
+    linear-gradient(165deg, rgba(var(--glass-rgb), 0.10) 0%, transparent 60%),
+    rgba(var(--glass-rgb), 0.06);
   backdrop-filter: blur(30px) saturate(1.6);
   -webkit-backdrop-filter: blur(30px) saturate(1.6);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(var(--glass-rgb), 0.12);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
   animation: fadeUp 1s 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -282,20 +284,20 @@
 /* Pulsation des arêtes des cartes */
 @keyframes cardEdgePulse {
   0%, 100% {
-    border-top-color: rgba(255, 255, 255, 0.16);
+    border-top-color: rgba(var(--glass-rgb), 0.16);
     box-shadow:
-      0 6px 24px rgba(0, 0, 0, 0.28),
-      0 1px 0 rgba(255, 255, 255, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+      0 6px 24px rgba(var(--shade-rgb), 0.28),
+      0 1px 0 rgba(var(--glass-rgb), 0.06),
+      inset 0 1px 0 rgba(var(--glass-rgb), 0.08),
+      inset 0 -1px 0 rgba(var(--shade-rgb), 0.12);
   }
   50% {
     border-top-color: rgba(200, 80, 192, 0.30);
     box-shadow:
-      0 6px 24px rgba(0, 0, 0, 0.28),
+      0 6px 24px rgba(var(--shade-rgb), 0.28),
       0 0 28px rgba(200, 80, 192, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+      inset 0 1px 0 rgba(var(--glass-rgb), 0.12),
+      inset 0 -1px 0 rgba(var(--shade-rgb), 0.12);
   }
 }
 
@@ -360,25 +362,25 @@
 
   background:
     linear-gradient(165deg,
-      rgba(255, 255, 255, 0.20) 0%,
-      rgba(255, 255, 255, 0.08) 40%,
-      rgba(255, 255, 255, 0.04) 60%),
-    rgba(255, 255, 255, 0.10);
+      rgba(var(--glass-rgb), 0.20) 0%,
+      rgba(var(--glass-rgb), 0.08) 40%,
+      rgba(var(--glass-rgb), 0.04) 60%),
+    rgba(var(--glass-rgb), 0.10);
 
   backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
   -webkit-backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
 
-  border: 1px solid rgba(255, 255, 255, 0.20);
-  border-top-color:    rgba(255, 255, 255, 0.30);
-  border-left-color:   rgba(255, 255, 255, 0.18);
-  border-right-color:  rgba(255, 255, 255, 0.08);
-  border-bottom-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(var(--glass-rgb), 0.20);
+  border-top-color:    rgba(var(--glass-rgb), 0.30);
+  border-left-color:   rgba(var(--glass-rgb), 0.18);
+  border-right-color:  rgba(var(--glass-rgb), 0.08);
+  border-bottom-color: rgba(var(--glass-rgb), 0.05);
 
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.25),
-    0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    0 8px 32px rgba(var(--shade-rgb), 0.25),
+    0 1px 0 rgba(var(--glass-rgb), 0.1),
+    inset 0 1px 0 rgba(var(--glass-rgb), 0.15),
+    inset 0 -1px 0 rgba(var(--shade-rgb), 0.08);
 }
 
 /* Shine qui glisse sur le verre au hover */
@@ -391,7 +393,7 @@
   height: 220%;
   background: radial-gradient(
     ellipse 35% 25% at 30% 25%,
-    rgba(255, 255, 255, 0.12) 0%,
+    rgba(var(--glass-rgb), 0.12) 0%,
     transparent 65%
   );
   pointer-events: none;
@@ -427,13 +429,13 @@
 .feature-card:hover {
   transform: translateY(-14px) rotateX(10deg) rotateY(-4deg);
   border-top-color:   rgba(231, 127, 191, 0.35);
-  border-left-color:  rgba(255, 255, 255, 0.18);
+  border-left-color:  rgba(var(--glass-rgb), 0.18);
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.45),
+    0 24px 60px rgba(var(--shade-rgb), 0.45),
     0 0 60px rgba(200, 80, 192, 0.14),
     0 0 0 1px rgba(200, 80, 192, 0.08),
-    inset 0 2px 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.16);
+    inset 0 2px 0 rgba(var(--glass-rgb), 0.16),
+    inset 0 -1px 0 rgba(var(--shade-rgb), 0.16);
 }
 
 .feature-card:hover::before {
@@ -526,20 +528,20 @@
   border-radius: 20px;
   background:
     linear-gradient(165deg,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.06) 40%,
-      rgba(255, 255, 255, 0.03) 60%),
-    rgba(255, 255, 255, 0.08);
+      rgba(var(--glass-rgb), 0.18) 0%,
+      rgba(var(--glass-rgb), 0.06) 40%,
+      rgba(var(--glass-rgb), 0.03) 60%),
+    rgba(var(--glass-rgb), 0.08);
   backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
   -webkit-backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-top-color: rgba(255, 255, 255, 0.25);
-  border-left-color: rgba(255, 255, 255, 0.15);
-  border-right-color: rgba(255, 255, 255, 0.08);
-  border-bottom-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(var(--glass-rgb), 0.18);
+  border-top-color: rgba(var(--glass-rgb), 0.25);
+  border-left-color: rgba(var(--glass-rgb), 0.15);
+  border-right-color: rgba(var(--glass-rgb), 0.08);
+  border-bottom-color: rgba(var(--glass-rgb), 0.05);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 8px 32px rgba(var(--shade-rgb), 0.2),
+    inset 0 1px 0 rgba(var(--glass-rgb), 0.15);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -568,10 +570,10 @@
   border-radius: 20px;
   background:
     linear-gradient(165deg,
-      rgba(255, 255, 255, 0.04) 0%,
+      rgba(var(--glass-rgb), 0.04) 0%,
       transparent 50%),
-    rgba(255, 255, 255, 0.015);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+    rgba(var(--glass-rgb), 0.015);
+  border: 1px solid rgba(var(--glass-rgb), 0.06);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -604,8 +606,8 @@
   gap: 8px;
   padding: 12px 16px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(var(--glass-rgb), 0.03);
+  border: 1px solid rgba(var(--glass-rgb), 0.04);
   transition: border-color 0.3s ease;
 }
 
@@ -657,25 +659,25 @@
   /* 3D Glass panel — iOS frosted */
   background:
     linear-gradient(165deg,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.07) 35%,
-      rgba(255, 255, 255, 0.03) 55%),
-    rgba(255, 255, 255, 0.08);
+      rgba(var(--glass-rgb), 0.18) 0%,
+      rgba(var(--glass-rgb), 0.07) 35%,
+      rgba(var(--glass-rgb), 0.03) 55%),
+    rgba(var(--glass-rgb), 0.08);
 
   backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
   -webkit-backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
 
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-top-color: rgba(255, 255, 255, 0.28);
-  border-left-color: rgba(255, 255, 255, 0.15);
-  border-right-color: rgba(255, 255, 255, 0.08);
-  border-bottom-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(var(--glass-rgb), 0.18);
+  border-top-color: rgba(var(--glass-rgb), 0.28);
+  border-left-color: rgba(var(--glass-rgb), 0.15);
+  border-right-color: rgba(var(--glass-rgb), 0.08);
+  border-bottom-color: rgba(var(--glass-rgb), 0.05);
 
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.25),
-    0 0 1px rgba(255, 255, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.06);
+    0 8px 32px rgba(var(--shade-rgb), 0.25),
+    0 0 1px rgba(var(--glass-rgb), 0.1),
+    inset 0 1px 0 rgba(var(--glass-rgb), 0.18),
+    inset 0 -1px 0 rgba(var(--shade-rgb), 0.06);
 }
 
 .download__glow {
@@ -729,30 +731,30 @@
   gap: 12px;
   padding: 14px 24px;
   background:
-    linear-gradient(165deg, rgba(255, 255, 255, 0.12) 0%, transparent 60%),
-    rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+    linear-gradient(165deg, rgba(var(--glass-rgb), 0.12) 0%, transparent 60%),
+    rgba(var(--glass-rgb), 0.08);
+  border: 1px solid rgba(var(--glass-rgb), 0.18);
   border-radius: 14px;
   text-decoration: none;
   color: var(--text-primary);
   backdrop-filter: blur(30px) saturate(1.6);
   -webkit-backdrop-filter: blur(30px) saturate(1.6);
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    0 4px 16px rgba(var(--shade-rgb), 0.15),
+    inset 0 1px 0 rgba(var(--glass-rgb), 0.12);
   transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
 .download__btn:hover {
   transform: translateY(-3px);
   background:
-    linear-gradient(165deg, rgba(255, 255, 255, 0.18) 0%, transparent 60%),
-    rgba(255, 255, 255, 0.12);
+    linear-gradient(165deg, rgba(var(--glass-rgb), 0.18) 0%, transparent 60%),
+    rgba(var(--glass-rgb), 0.12);
   border-color: rgba(200, 80, 192, 0.35);
   color: var(--text-primary);
   box-shadow:
     0 8px 32px rgba(200, 80, 192, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    inset 0 1px 0 rgba(var(--glass-rgb), 0.18);
 }
 
 .download__btn-icon {
@@ -895,12 +897,12 @@
 @media (hover: none) {
   .feature-card:hover {
     transform: none;
-    border-top-color: rgba(255, 255, 255, 0.12);
+    border-top-color: rgba(var(--glass-rgb), 0.12);
     box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.2),
-      0 0 1px rgba(255, 255, 255, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+      0 4px 16px rgba(var(--shade-rgb), 0.2),
+      0 0 1px rgba(var(--glass-rgb), 0.05),
+      inset 0 1px 0 rgba(var(--glass-rgb), 0.06),
+      inset 0 -1px 0 rgba(var(--shade-rgb), 0.1);
   }
 
   .feature-card:hover::before {

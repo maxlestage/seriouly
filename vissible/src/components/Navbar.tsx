@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { scrollToSection } from '../utils/scrollToSection';
+import ThemeSwitch from './ThemeSwitch';
 import './Navbar.css';
 
 const logoUrl = `${import.meta.env.BASE_URL}logo-seriously.png`;
@@ -65,6 +66,7 @@ const Navbar = () => {
         </div>
 
         <div className="navbar__cta">
+          <ThemeSwitch />
           <a href="#download" className="navbar__btn interactive" onClick={handleAnchorClick('download')}>
             Télécharger
           </a>
@@ -119,6 +121,7 @@ const Navbar = () => {
         >
           Télécharger
         </a>
+        <ThemeSwitch className="theme-switch--block" />
       </div>
 
       {menuOpen && <div className="navbar__overlay" onClick={() => setMenuOpen(false)} />}
