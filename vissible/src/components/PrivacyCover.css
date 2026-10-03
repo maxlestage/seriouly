@@ -11,18 +11,14 @@
   gap: 28px;
 
   /* Same background as the splash screen */
-  background:
-    radial-gradient(ellipse 90% 55% at 30% 0%,   rgba(160, 50, 200, 0.55) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 10% 100%,  rgba(120, 30, 170, 0.5)  0%, transparent 55%),
-    radial-gradient(ellipse 60% 45% at 90% 95%,   rgba(100, 20, 160, 0.45) 0%, transparent 55%),
-    linear-gradient(170deg, #1e1035 0%, #0f0820 45%, #15082a 75%, #1a0f35 100%);
+  background: var(--cover-bg);
   background-color: var(--bg-deep);
 }
 
 .privacy-cover__logo {
   width: 120px;
   height: 120px;
-  mix-blend-mode: lighten;
+  mix-blend-mode: var(--logo-blend);
   filter: drop-shadow(0 0 60px rgba(180, 60, 220, 0.35));
 }
 

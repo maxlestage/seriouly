@@ -4,6 +4,7 @@
   z-index: -3;
   pointer-events: none;
   overflow: hidden;
+  opacity: var(--orbs-opacity);
 }
 
 .animated-bg__orb {
