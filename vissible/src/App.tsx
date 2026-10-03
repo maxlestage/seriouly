@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import AnimatedBackground from './components/AnimatedBackground';
 import GlassCursor from './components/GlassCursor';
 import Splash from './components/Splash';
+import PrivacyCover from './components/PrivacyCover';
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -17,6 +18,7 @@ function App() {
     <HashRouter>
       <AnimatedBackground />
       {isMobile() && <Splash />}
+      <PrivacyCover />
       <div className="app">
         <ScrollToTop />
         <GlassCursor />
