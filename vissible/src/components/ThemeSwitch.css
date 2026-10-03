@@ -1,0 +1,42 @@
+/* ===== Theme switch — Auto / Clair / Sombre ===== */
+
+.theme-switch {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  border-radius: 999px;
+  background: rgba(var(--glass-rgb), 0.06);
+  border: 1px solid rgba(var(--glass-rgb), 0.1);
+}
+
+.theme-switch__option {
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.theme-switch__option:hover {
+  color: var(--text-primary);
+}
+
+.theme-switch__option--active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--purple-light), var(--purple-primary));
+}
+
+/* Full width in the burger menu, with 44px touch targets */
+.theme-switch--block {
+  display: flex;
+  margin-top: 16px;
+}
+
+.theme-switch--block .theme-switch__option {
+  flex: 1;
+  min-height: 44px;
+  font-size: 0.95rem;
+}

@@ -4,8 +4,8 @@
   position: relative;
   z-index: 100;
   padding: 40px 40px 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(13, 5, 21, 0.4);
+  border-top: 1px solid rgba(var(--glass-rgb), 0.05);
+  background: rgba(var(--bar-rgb), 0.4);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -29,7 +29,7 @@
 .footer__logo {
   width: 24px;
   height: 24px;
-  mix-blend-mode: lighten;
+  mix-blend-mode: var(--logo-blend);
 }
 
 .footer__name {
