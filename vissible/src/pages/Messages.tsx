@@ -39,8 +39,7 @@ const Messages = () => {
     setShowChat(true);
   };
 
-  const handleDoubleTap = (msgId: number) => {
-    const now = Date.now();
+  const handleDoubleTap = (msgId: number, now: number) => {
     if (lastTap && lastTap.id === msgId && now - lastTap.time < 300) {
       setMessages((prev) =>
         prev.map((m) => (m.id === msgId ? { ...m, liked: !m.liked } : m))
@@ -140,7 +139,7 @@ const Messages = () => {
             <div
               key={msg.id}
               className={`msg-bubble-row ${msg.sender === 'me' ? 'msg-bubble-row--right' : 'msg-bubble-row--left'}`}
-              onClick={() => handleDoubleTap(msg.id)}
+              onClick={(e) => handleDoubleTap(msg.id, e.timeStamp)}
             >
               <div
                 className={`msg-bubble ${msg.sender === 'me' ? 'msg-bubble--mine' : 'msg-bubble--theirs'}`}
