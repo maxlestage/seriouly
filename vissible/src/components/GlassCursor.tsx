@@ -31,7 +31,7 @@ const removeMask = (el: HTMLElement | null) => {
   (el.style as CSSStyleDeclaration & { webkitMaskImage: string }).webkitMaskImage = '';
 };
 
-const GlassCursor = () => {
+const GlassCursorLens = () => {
   const cursorRef     = useRef<HTMLDivElement>(null);
   const innerRef      = useRef<HTMLDivElement>(null);
   const trailRef      = useRef<HTMLDivElement>(null);
@@ -44,8 +44,6 @@ const GlassCursor = () => {
   const lensClone  = useRef<HTMLElement | null>(null);
   const nullFrames = useRef(0);
   const [visible, setVisible] = useState(false);
-
-  if (isTouchDevice()) return null;
 
   useEffect(() => {
     const clearLens = () => {
@@ -187,5 +185,8 @@ const GlassCursor = () => {
     </>
   );
 };
+
+// No custom cursor on touch screens; the check stays outside the hooks component.
+const GlassCursor = () => (isTouchDevice() ? null : <GlassCursorLens />);
 
 export default GlassCursor;
